@@ -3,7 +3,7 @@ TARGET = demo00
 
 # 编译器设置
 CXX = g++
-CXXFLAGS = -std=c++14 -Wall -Wextra -pedantic
+CXXFLAGS = -std=c++14 -Wall -Wextra -pedantic -lmysqlcppconn
 GoogleTest = -lgtest -lgtest_main -pthread
 
 # 头文件和库文件的路径
@@ -11,7 +11,7 @@ INCLUDE_DIRS = -I./include -I./include/utility -I./include/third_party_library
 LIB_DIRS = -L./lib
 
 # 需要链接的库文件
-LIBS = 
+LIBS = -lmysqlcppconn 
 
 # 源文件和对象文件
 SRC_FILES := $(shell find src -type f -name '*.cpp')
