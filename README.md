@@ -124,3 +124,18 @@ clean:
 
 #### 头文件中的宏、c++中的静态变量
 每个头文件都需要定义宏，是为了在编译的时候不重复引入相同的头文件。**静态变量**需要初始化，否则编译器无法为静态变量分配内存空间。
+
+#### docker下载运行服务 Linux安装动态链接库
+我在Windows上安装了docker，然后在dockers上安装了redis镜像。如果已经pull了redis的镜像，可以在powershell中运行下面的命令进行基于特定参数启动redis服务，如果直接用docker的官方桌面客户端，不好配置参数。比如如果用官方桌面客户端启动redis服务，那么我在redis中进行写操作会遇到auth error的错误，是因为没有设置用户名和密码，缺少权限。
+```
+docker run --name myredis -it -p 6379:6379 -v /data/redis-data  redis
+```
+linux中可以用`redis-cli`工具作为客户端访问redis服务
+```
+redis-cli -l ip -p port
+```
+
+如果最近在linux系统安装了动态共享文件啊.so结尾的文件，需要使用`ldconfig`命令加载配置信息。要不然在运行依赖于共享库的二进制文件时会遇到下面错误
+```
+/redis_connect: error while loading shared libraries: libhiredis.so.1.1.0: cannot open shared object file: No such file or directory
+```
